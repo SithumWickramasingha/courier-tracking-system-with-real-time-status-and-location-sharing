@@ -11,6 +11,16 @@ const getOrders = (req,res) => {
 //@access public 
 
 const createOrder = (req,res) => {
+  
+
+  //handling the error
+  const {id} = req.body;
+
+  if(!id){
+    res.status(400);
+    throw new Error("Id is missing");
+    
+  }
   console.log("The id: ", req.body);
   res.status(200).json({message: "create a contact"});
 }
