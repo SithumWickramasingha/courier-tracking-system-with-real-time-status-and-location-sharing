@@ -1,0 +1,20 @@
+{
+  "name": "courier_tracking_backend_api",
+  "version": "1.0.0",
+  "description": "This is express project for my backend api",
+  "homepage": "https://github.com/SithumWickramasingha/courier-tracking-system-with-real-time-status-and-location-sharing#readme",
+  "bugs": {
+    "url": "https://github.com/SithumWickramasingha/courier-tracking-system-with-real-time-status-and-location-sharing/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SithumWickramasingha/courier-tracking-system-with-real-time-status-and-location-sharing.git"
+  },
+  "license": "ISC",
+  "author": "Sithum Wickramasingha",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
