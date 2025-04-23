@@ -1,6 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const db = require("../config/dbConnection");
-
+const getLocationName = require("../service/location");
 
 var selectedItem = 0;
 let orderIds = 0;
@@ -56,7 +56,7 @@ const getOrder = asyncHandler(async (req,res) =>{
   });
 
 
-  db.query("SELECT * FROM order_tracking WHERE order_id = ?", [req.params.id], (err, trackingResults) => {
+  db.query("SELECT * FROM order_tracking WHERE order_id = ?", [req.params.id], async (err, trackingResults) => {
     if (err) {
       console.log("DB error: ", err);
       return res.status(500).json({ message: "Failed to get tracking info" });
@@ -74,6 +74,8 @@ const getOrder = asyncHandler(async (req,res) =>{
     };
 
     console.log(trackingInfo);
+    const location = await getLocationName(trackingInfo.latitude, trackingInfo.longitude);
+    console.log("Location: ", location);
   });
 
 
