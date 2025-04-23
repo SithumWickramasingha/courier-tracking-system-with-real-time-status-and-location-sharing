@@ -4,9 +4,9 @@ const errorHandler = require("./middleware/errorHandler");
 const http = require("http");
 const socketIo = require("socket.io");
 
-
 const app = express();
-const server = http.createServer(app);
+
+const server = http.createServer(app); // create http server
 const io = socketIo(server, {
   cors: {
     origin: "*",
@@ -22,7 +22,7 @@ io.on("connection", (socket) => {
   });
 });
 
-app.set("socketid",io);
+app.set("socketio",io);
 
 const port = process.env.PORT || 5000;
 
@@ -32,4 +32,8 @@ app.use(errorHandler);
 
 app.listen(port, ()=> {
   console.log(`Server is running on port ${port}`);
+});
+
+server.listen(5000, () => {
+  console.log(`Server running on port 5000`);
 });

@@ -27,13 +27,15 @@ const getOrders = asyncHandler(async (req,res) => {
 const getOrder = asyncHandler(async (req,res) =>{
   // res.status(200).json({message: `Get a particular order ${req.params.id}`});
 
+  const io = req.app.get("socketio"); // Get socket instance
+
   db.query("SELECT * FROM orders", (err, results) =>{
     if(err){
       console.log("DB error: ",err);
       return res.status(500).json({message: "Failed to get orders"});
     }
 
-    orderIds = results.map(order => order.order_id); // filter to the
+    orderIds = results.map(order => order.order_id); // filter to the order id
     console.log("request id: ",req.params.id);
     
 
@@ -76,6 +78,15 @@ const getOrder = asyncHandler(async (req,res) =>{
     console.log(trackingInfo);
     const location = await getLocationName(trackingInfo.latitude, trackingInfo.longitude);
     console.log("Location: ", location);
+
+    const realTimeUpdateData = {
+      order_status: trackingResults[0].order_status,
+      location
+    }
+
+    console.log(realTimeUpdateData);
+
+    io.emit("orderUpdate", realTimeUpdateData);
   });
 
 
